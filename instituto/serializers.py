@@ -4,7 +4,7 @@ from instituto.models import Estudiante,Curso
 class EstudianteSerializer(serializers.ModelSerializer):
     class Meta:
         model= Estudiante
-        fields = ['id','nombre','email','dni','fecha_nacimiento','movil']
+        fields = '__all__'
 
 class CursoSerializer(serializers.ModelSerializer):
     class Meta:
