@@ -1,16 +1,17 @@
 from rest_framework import serializers
 from instituto.models import Estudiante,Curso,Matricula
+from instituto.validators import dni_invalido, movil_invalido, nombre_invalido
 
 class EstudianteSerializer(serializers.ModelSerializer):
     class Meta:
         model= Estudiante
         fields = '__all__'
     def validate(self,datos):
-        if len(datos['dni']) != 11:
+        if dni_invalido(datos['dni']):
               raise serializers.ValidationError({'dni':'El dni debe tener 11 digitos'})
-        if not datos['nombre'].isalpha():
+        if nombre_invalido(datos['nombre']):
               raise serializers.ValidationError({'nombre':'EL NOMBRE SOLO PUEDE CONTENER LETRAS'})
-        if len(datos['movil']) != 9:
+        if movil_invalido(datos['movil']):
               raise serializers.ValidationError({'movil':'El numero de telefono tiene que tener 9 numeros'})
         return datos
         
