@@ -5,6 +5,10 @@ class EstudianteSerializer(serializers.ModelSerializer):
     class Meta:
         model= Estudiante
         fields = '__all__'
+    def validate_dni(self,dni):
+         if len(dni) != 11:
+              raise serializers.ValidationError('El dni debe tener 11 digitos')
+         return dni
 
 class CursoSerializer(serializers.ModelSerializer):
     class Meta:
