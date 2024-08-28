@@ -3,7 +3,7 @@ from django.db import models
 class Estudiante(models.Model):
     nombre=models.CharField(max_length = 100)
     email =models.EmailField(blank=False, max_length=30)
-    dni=models.CharField(max_length=11)
+    dni=models.CharField(max_length=11, unique=True)
     fecha_nacimiento=models.DateField(blank=False, null=False)
     movil=models.CharField(max_length = 9)
 
