@@ -29,4 +29,4 @@ class ListaMatriculasCursoSerializer(serializers.ModelSerializer):
      estudiante_nombre = serializers.ReadOnlyField(source = 'estudiante.nombre')
      class Meta:
           model = Matricula
-          fields = ['estudiante_nombnre']
+          fields = ['estudiante_nombre']
