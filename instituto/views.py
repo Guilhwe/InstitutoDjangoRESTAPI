@@ -1,7 +1,7 @@
 from instituto.models import Estudiante,Curso,Matricula
 from instituto.serializers import EstudianteSerializer,CursoSerializer,MatriculaSerializer, ListaMatriculasCursoSerializer,ListaMatriculasEstudianteSerializer
 from rest_framework import viewsets,generics
-
+#PARA QUE LA AUTENTIFIACION NO SEA GENERAL HAY QUE IMPORTAR EN VIEWS DESDE RESTFRAMEWORK LAS ATENTIFICACIONES Y PERMISIONES MY PONERLAS EN CADA VIEWS
 
 class EstudianteViewSet(viewsets.ModelViewSet):
    
