@@ -5,18 +5,17 @@ class EstudianteSerializer(serializers.ModelSerializer):
     class Meta:
         model= Estudiante
         fields = '__all__'
-    def validate_dni(self,dni):
-         if len(dni) != 11:
-              raise serializers.ValidationError('El dni debe tener 11 digitos')
-         return dni
-    def validate_nombre(self,nombre):
-         if not  nombre.isalpha():
-              raise serializers.ValidationError('EL NOMBRE SOLO PUEDE CONTENER LETRAS')
-         return nombre
-    def validate_movil(self,movil):
-         if len(movil) != 9:
-              raise serializers.ValidationError('El numero de telefono tiene que tener 9 numeros')
-         return movil
+    def validate(self,datos):
+        if len(datos['dni']) != 11:
+              raise serializers.ValidationError({'dni':'El dni debe tener 11 digitos'})
+        if not datos['nombre'].isalpha():
+              raise serializers.ValidationError({'nombre':'EL NOMBRE SOLO PUEDE CONTENER LETRAS'})
+        if len(datos['movil']) != 9:
+              raise serializers.ValidationError({'movil':'El numero de telefono tiene que tener 9 numeros'})
+        return datos
+        
+
+   
 
 class CursoSerializer(serializers.ModelSerializer):
     class Meta:
