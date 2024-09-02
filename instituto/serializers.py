@@ -8,7 +8,7 @@ class EstudianteSerializer(serializers.ModelSerializer):
         fields = '__all__'
     def validate(self,datos):
         if dni_invalido(datos['dni']):
-              raise serializers.ValidationError({'dni':'El dni debe tener 11 digitos'})
+              raise serializers.ValidationError({'dni':'El dni debe tener 10 numeros y una letra al final'})
         if nombre_invalido(datos['nombre']):
               raise serializers.ValidationError({'nombre':'EL NOMBRE SOLO PUEDE CONTENER LETRAS'})
         if movil_invalido(datos['movil']):
