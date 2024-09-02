@@ -6,7 +6,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 
 class EstudianteViewSet(viewsets.ModelViewSet):
    
-    queryset = Estudiante.objects.all()
+    queryset = Estudiante.objects.all().order_by('id')
     #serializer_class = EstudianteSerializer
     filter_backends=[DjangoFilterBackend, filters.OrderingFilter,filters.SearchFilter]
     ordering_fields =['nombre',]
@@ -18,24 +18,24 @@ class EstudianteViewSet(viewsets.ModelViewSet):
 
 class CursoViewSet(viewsets.ModelViewSet):
    
-    queryset= Curso.objects.all()
+    queryset= Curso.objects.all().order_by('id')
     serializer_class = CursoSerializer
 
 class MatriculaViewSet(viewsets.ModelViewSet):
     
-    queryset= Matricula.objects.all()
+    queryset= Matricula.objects.all().order_by('id')
     serializer_class = MatriculaSerializer
 
 class ListaMatriculaEstudiante(generics.ListAPIView):
     
     def get_queryset(self):
-        queryset = Matricula.objects.filter(estudiante_id=self.kwargs['pk'])
+        queryset = Matricula.objects.filter(estudiante_id=self.kwargs['pk']).order_by('id')
         return queryset
     serializer_class = ListaMatriculasEstudianteSerializer
         
 class ListaMatriculaCurso(generics.ListAPIView):
     
     def get_queryset(self):
-        queryset = Matricula.objects.filter(curso_id=self.kwargs['pk'])
+        queryset = Matricula.objects.filter(curso_id=self.kwargs['pk']).order_by('id')
         return queryset
     serializer_class = ListaMatriculasCursoSerializer
