@@ -42,3 +42,9 @@ class ListaMatriculasCursoSerializer(serializers.ModelSerializer):
      class Meta:
           model = Matricula
           fields = ['estudiante_nombre']
+
+
+class EstudianteSerializerV2(serializers.ModelSerializer):
+    class Meta:
+        model= Estudiante
+        exclude =['dni','fecha_nacimiento',]

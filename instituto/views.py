@@ -1,5 +1,5 @@
 from instituto.models import Estudiante,Curso,Matricula
-from instituto.serializers import EstudianteSerializer,CursoSerializer,MatriculaSerializer, ListaMatriculasCursoSerializer,ListaMatriculasEstudianteSerializer
+from instituto.serializers import EstudianteSerializer,CursoSerializer,MatriculaSerializer, ListaMatriculasCursoSerializer,ListaMatriculasEstudianteSerializer,EstudianteSerializerV2
 from rest_framework import viewsets,generics, filters
 from django_filters.rest_framework import DjangoFilterBackend
 #PARA QUE LA AUTENTIFIACION NO SEA GENERAL HAY QUE IMPORTAR EN VIEWS DESDE RESTFRAMEWORK LAS ATENTIFICACIONES Y PERMISIONES MY PONERLAS EN CADA VIEWS
@@ -7,10 +7,14 @@ from django_filters.rest_framework import DjangoFilterBackend
 class EstudianteViewSet(viewsets.ModelViewSet):
    
     queryset = Estudiante.objects.all()
-    serializer_class = EstudianteSerializer
+    #serializer_class = EstudianteSerializer
     filter_backends=[DjangoFilterBackend, filters.OrderingFilter,filters.SearchFilter]
     ordering_fields =['nombre',]
-    search_fields = ['dni',]
+    search_fields = ['dni','nombre',]
+    def get_serializer_class(self):
+        if self.request.version == 'V2':
+            return EstudianteSerializerV2
+        return EstudianteSerializer
 
 class CursoViewSet(viewsets.ModelViewSet):
    
