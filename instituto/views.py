@@ -4,6 +4,7 @@ from rest_framework import viewsets,generics, filters
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.throttling import UserRateThrottle
 from instituto.throttle import MatriculaAnonRateThrottle
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 #PARA QUE LA AUTENTIFIACION NO SEA GENERAL HAY QUE IMPORTAR EN VIEWS DESDE RESTFRAMEWORK LAS ATENTIFICACIONES Y PERMISIONES MY PONERLAS EN CADA VIEWS
 
 class EstudianteViewSet(viewsets.ModelViewSet):
@@ -42,6 +43,7 @@ class CursoViewSet(viewsets.ModelViewSet):
    
     queryset= Curso.objects.all().order_by('id')
     serializer_class = CursoSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
 
 class MatriculaViewSet(viewsets.ModelViewSet):
