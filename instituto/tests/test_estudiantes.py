@@ -37,4 +37,18 @@ class EstudiantesTestCase(APITestCase):
         datos_estudiante= Estudiante.objects.get(pk=1)#con los datos del estudiante en el banco de datos
         datos_estudiante_serializados =EstudianteSerializer(datos_estudiante).data
         self.assertEqual(response.data,datos_estudiante_serializados)
+
+    def test_requisicion_post_para_crear_un_estudiante(self):
+        '''Test de requisicion POST para un estudiante'''
+        datos={
+            'nombre':'test',
+            'email':'test@gmail.com',
+            'dni':'0987654321u',
+            'fecha_nacimiento' : '2003-03-27',
+            'movil':'543654234',
+
+        }
+        response = self.client.post(self.url,datos)
+        self.assertEqual(response.status_code,status.HTTP_201_CREATED)
+
         
