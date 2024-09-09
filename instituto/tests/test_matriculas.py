@@ -39,3 +39,9 @@ class MatriculasTestCase(APITestCase):
         }
         response = self.client.post(self.url, data=datos)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+    
+    def test_requisicion_para_deletear_un_CURSO(self):
+        '''Test de requisicion DELETE un CURSO '''
+        
+        response = self.client.delete(f'{self.url}1/')
+        self.assertEqual(response.status_code,status.HTTP_405_METHOD_NOT_ALLOWED)
