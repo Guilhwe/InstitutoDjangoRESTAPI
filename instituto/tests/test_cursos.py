@@ -47,3 +47,15 @@ class CursosTestCase(APITestCase):
         
         response = self.client.delete(f'{self.url}1/')#/curso/2/
         self.assertEqual(response.status_code,status.HTTP_204_NO_CONTENT)
+    
+    def test_requisicion_put_para_actualizar_un_curso(self):
+        '''Test de requisicion PUT para un curso'''
+        datos={
+            'codigo':'CTT',
+            'nivel':'A',
+            'descripcion':'ejemplo'
+
+
+        }
+        response = self.client.put(f'{self.url}1/', data=datos)
+        self.assertEqual(response.status_code,status.HTTP_200_OK)

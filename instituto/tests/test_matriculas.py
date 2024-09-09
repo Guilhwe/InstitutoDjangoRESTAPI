@@ -45,3 +45,15 @@ class MatriculasTestCase(APITestCase):
         
         response = self.client.delete(f'{self.url}1/')
         self.assertEqual(response.status_code,status.HTTP_405_METHOD_NOT_ALLOWED)
+    
+    def test_requisicion_put_para_actualizar_una_matricula(self):
+        '''Test de requisicion PUT para una matricula'''
+        datos={
+            'estudiante': self.estudiante.pk,
+            'curso': self.curso.pk,
+            'turno': 'M'
+
+
+        }
+        response = self.client.put(f'{self.url}1/', data=datos)
+        self.assertEqual(response.status_code,status.HTTP_405_METHOD_NOT_ALLOWED)
