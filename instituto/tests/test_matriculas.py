@@ -8,27 +8,17 @@ from instituto.models import Matricula, Estudiante,Curso
 
 
 class MatriculasTestCase(APITestCase):
+    fixtures =['prototipo_banco.json']
     def setUp(self):
-        self.usuario = User.objects.create_superuser(username='admin',password='admin')
+        self.usuario = User.objects.get(username='willy')
         self.url = reverse('Matricula-list')
         self.client.force_authenticate(user=self.usuario)
-        self.estudiante =Estudiante.objects.create(
-            nombre= 'EJEMPLO',
-            email='ejemplo@email.com',
-            dni='123456783p',
-            fecha_nacimiento= '1996-02-02',
-            movil='879567365'
-        )
-        self.curso = Curso.objects.create(
-            codigo='EJM', 
-            descripcion='prueba',
-            nivel='A'
-        )
-        self.matricula= Matricula.objects.create(
-            estudiante= self.estudiante,
-            curso=self.curso,
-            turno='N'
-        )
+        self.estudiante =Estudiante.objects.get(pk=1)
+        
+        self.curso = Curso.objects.get(pk=1)
+        
+        self.matricula= Matricula.objects.get(pk=1)
+        
     
     def test_requisicion_post_para_crear_matricula(self):
         '''Test para verificar la requisicion POST para crear una matrícula'''

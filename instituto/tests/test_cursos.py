@@ -7,15 +7,14 @@ from instituto.serializers import CursoSerializer
 
 
 class CursosTestCase(APITestCase):
+    fixtures =['prototipo_banco.json']
     def setUp(self):
-        self.usuario = User.objects.create_superuser(username='admin',password='admin')
+        self.usuario = User.objects.get(username='willy')
         self.url = reverse('Curso-list')
         self.client.force_authenticate(user=self.usuario)
-        self.curso= Curso.objects.create(
-            codigo='CTT',
-            descripcion='EJEMPLO',
-            nivel='A'
-        )
+        self.curso_01= Curso.objects.get(pk=1)
+        self.curso_02= Curso.objects.get(pk=2)
+        
 
     def test_requisicion_get_para_listar_cursos(self):
         '''Test de requisicion GET'''
